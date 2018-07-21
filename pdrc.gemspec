@@ -1,19 +1,17 @@
 # -*- encoding: utf-8 -*-
 $:.push File.expand_path("../lib", __FILE__)
-require 'gibbon/version'
+require 'pdrc/version'
 
 Gem::Specification.new do |s|
-  s.name        = "gibbon"
-  s.version     = Gibbon::VERSION
-  s.authors     = ["Amro Mousa"]
-  s.email       = ["amromousa@gmail.com"]
-  s.homepage    = "http://github.com/amro/gibbon"
+  s.name        = "pdrc"
+  s.version     = PDRC::VERSION
+  s.authors     = ["Lucas Willett", "Amro Mousa"]
+  s.email       = ["me@ltw.io", "amromousa@gmail.com"]
+  s.homepage    = "http://github.com/ltw/pdrc"
 
-  s.summary     = %q{A wrapper for MailChimp API 3.0 and Export API}
-  s.description = %q{A wrapper for MailChimp API 3.0 and Export API}
+  s.summary     = %q{A wrapper for the Pagerduty REST API v2}
+  s.description = %q{A wrapper for the Pagerduty REST API v2}
   s.license     = "MIT"
-
-  s.rubyforge_project = "gibbon"
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
@@ -27,5 +25,4 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rake'
   s.add_development_dependency "rspec", "3.5.0"
   s.add_development_dependency 'webmock', '~> 1.21.0'
-
 end

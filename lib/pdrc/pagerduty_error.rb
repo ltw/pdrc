@@ -1,5 +1,5 @@
-module Gibbon
-  class MailChimpError < StandardError
+module PDRC
+  class PagerdutyError < StandardError
     attr_reader :title, :detail, :body, :raw_body, :status_code
 
     def initialize(message = "", params = {})

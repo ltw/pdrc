@@ -1,4 +1,4 @@
-module Gibbon
+module PDRC
   class Request
     attr_accessor :api_key, :api_endpoint, :timeout, :open_timeout, :proxy, :faraday_adapter, :symbolize_keys, :debug, :logger
 
@@ -7,12 +7,12 @@ module Gibbon
 
     def initialize(api_key: nil, api_endpoint: nil, timeout: nil, open_timeout: nil, proxy: nil, faraday_adapter: nil, symbolize_keys: false, debug: false, logger: nil)
       @path_parts = []
-      @api_key = api_key || self.class.api_key || ENV['MAILCHIMP_API_KEY']
+      @api_key = api_key || self.class.api_key || ENV['PAGERDUTY_API_KEY']
       @api_key = @api_key.strip if @api_key
       @api_endpoint = api_endpoint || self.class.api_endpoint
       @timeout = timeout || self.class.timeout || DEFAULT_TIMEOUT
       @open_timeout = open_timeout || self.class.open_timeout || DEFAULT_OPEN_TIMEOUT
-      @proxy = proxy || self.class.proxy || ENV['MAILCHIMP_PROXY']
+      @proxy = proxy || self.class.proxy || ENV['PAGERDUTY_PROXY']
       @faraday_adapter = faraday_adapter || Faraday.default_adapter
       @symbolize_keys = symbolize_keys || self.class.symbolize_keys || false
       @debug = debug || self.class.debug || false
@@ -20,8 +20,6 @@ module Gibbon
     end
 
     def method_missing(method, *args)
-      # To support underscores, we replace them with hyphens when calling the API
-      @path_parts << method.to_s.gsub("_", "-").downcase
       @path_parts << args if args.length > 0
       @path_parts.flatten!
       self

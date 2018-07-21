@@ -1,7 +1,5 @@
-module Gibbon
+module PDRC
   class APIRequest
-    include Helpers
-
     def initialize(builder: nil)
       @request_builder = builder
     end
@@ -129,7 +127,7 @@ module Gibbon
       rescue MultiJson::ParseError
       end
 
-      error_to_raise = MailChimpError.new(error.message, error_params)
+      error_to_raise = PagerdutyError.new(error.message, error_params)
 
       raise error_to_raise
     end
@@ -138,6 +136,7 @@ module Gibbon
       if request
         request.params.merge!(params) if params
         request.headers['Content-Type'] = 'application/json'
+        request.headers['Accept'] = 'application/vnd.pagerduty+json;version=2'
         request.headers.merge!(headers) if headers
         request.body = body if body
         request.options.timeout = self.timeout
@@ -153,7 +152,7 @@ module Gibbon
           faraday.response :logger, @request_builder.logger, bodies: true
         end
       end
-      client.basic_auth('apikey', self.api_key)
+      client.authorization(:Token, token: self.api_key)
       client
     end
 
@@ -167,7 +166,7 @@ module Gibbon
           parsed_response = Response.new(headers: headers, body: body)
         rescue MultiJson::ParseError
           error_params = { title: "UNPARSEABLE_RESPONSE", status_code: 500 }
-          error = MailChimpError.new("Unparseable response: #{response.body}", error_params)
+          error = PagerdutyError.new("Unparseable response: #{response.body}", error_params)
           raise error
         end
       end
@@ -178,7 +177,7 @@ module Gibbon
     def validate_api_key
       api_key = self.api_key
       unless api_key && (api_key["-"] || self.api_endpoint)
-        raise Gibbon::GibbonError, "You must set an api_key prior to making a call"
+        raise PDRC::PDRCError, "You must set an api_key prior to making a call"
       end
     end
 
@@ -187,8 +186,7 @@ module Gibbon
     end
 
     def base_api_url
-      computed_api_endpoint = "https://#{get_data_center_from_api_key(self.api_key)}api.mailchimp.com"
-      "#{self.api_endpoint || computed_api_endpoint}/3.0/"
+      "https://api.pagerduty.com/"
     end
   end
 end
