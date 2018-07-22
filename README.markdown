@@ -3,7 +3,6 @@
 pdrc is an API wrapper for Pagerduty's [REST API v2](https://v2.developer.pagerduty.com/docs/rest-api), based off amro's great MailChimp client [Gibbon](https://github.com/amro/gibbon).
 
 [![Build Status](https://secure.travis-ci.org/ltw/pdrc.svg)](http://travis-ci.org/ltw/pdrc)
-[![Dependency Status](https://gemnasium.com/ltw/pdrc.svg)](https://gemnasium.com/ltw/pdrc)
 
 ## Important Notes
 
