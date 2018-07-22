@@ -175,10 +175,7 @@ module PDRC
     end
 
     def validate_api_key
-      api_key = self.api_key
-      unless api_key && (api_key["-"] || self.api_endpoint)
-        raise PDRC::PDRCError, "You must set an api_key prior to making a call"
-      end
+      raise PDRC::PDRCError, "You must set an api_key prior to making a call" unless self.api_key
     end
 
     def api_url

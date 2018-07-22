@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'webmock/rspec'
 
 describe PDRC::APIRequest do
-  let(:api_key) { "1234-us1" }
+  let(:api_key) { "XFZ8MisS7d9IytnVniqS" }
 
   before do
     @pdrc = PDRC::Request.new(api_key: api_key)
@@ -10,12 +10,6 @@ describe PDRC::APIRequest do
   end
 
   it "surfaces client request exceptions as a PDRC::PagerdutyError" do
-    exception = Faraday::Error::ClientError.new("the server responded with status 503")
-    stub_request(:get, "#{@api_root}/teams").to_raise(exception)
-    expect { @pdrc.teams.retrieve }.to raise_error(PDRC::PagerdutyError)
-  end
-
-  it "surfaces an unparseable client request exception as a PDRC::PagerdutyError" do
     exception = Faraday::Error::ClientError.new("the server responded with status 503")
     stub_request(:get, "#{@api_root}/teams").to_raise(exception)
     expect { @pdrc.teams.retrieve }.to raise_error(PDRC::PagerdutyError)

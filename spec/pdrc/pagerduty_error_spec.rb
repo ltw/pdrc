@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Gibbon::MailChimpError do
+describe PDRC::PagerdutyError do
   let(:message) { 'Foo' }
   let(:params) do
     {
@@ -13,7 +13,7 @@ describe Gibbon::MailChimpError do
   end
 
   before do
-    @gibbon = Gibbon::MailChimpError.new(message, params)
+    @pdrc = PDRC::PagerdutyError.new(message, params)
   end
 
   it "adds the error params to the error message" do
@@ -24,26 +24,26 @@ describe Gibbon::MailChimpError do
                        "@raw_body=\"error_raw_body\", "     \
                        "@status_code=\"error_status_code\""
 
-    expect(@gibbon.message).to eq(expected_message)
+    expect(@pdrc.message).to eq(expected_message)
   end
 
   it 'sets the title attribute' do
-    expect(@gibbon.title).to eq(params[:title])
+    expect(@pdrc.title).to eq(params[:title])
   end
 
   it 'sets the detail attribute' do
-    expect(@gibbon.detail).to eq(params[:detail])
+    expect(@pdrc.detail).to eq(params[:detail])
   end
 
   it 'sets the body attribute' do
-    expect(@gibbon.body).to eq(params[:body])
+    expect(@pdrc.body).to eq(params[:body])
   end
 
   it 'sets the raw_body attribute' do
-    expect(@gibbon.raw_body).to eq(params[:raw_body])
+    expect(@pdrc.raw_body).to eq(params[:raw_body])
   end
 
   it 'sets the status_code attribute' do
-    expect(@gibbon.status_code).to eq(params[:status_code])
+    expect(@pdrc.status_code).to eq(params[:status_code])
   end
 end

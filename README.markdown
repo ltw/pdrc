@@ -46,7 +46,7 @@ You can specify `headers`, `params`, and `body` when calling a `CRUD` method. Fo
 pdrc.teams.retrieve(headers: {"SomeHeader": "SomeHeaderValue"}, params: {"query_param": "query_param_value"})
 ```
 
-Of course, `body` is only supported on `create`, `update`, and `upsert` calls. Those map to HTTP `POST`, `PATCH`, and `PUT` verbs respectively.
+Of course, `body` is only supported on `create` and `update` calls. Those map to HTTP `POST`, `PATCH`, and `PUT` verbs respectively.
 
 You can set `api_key`, `timeout`, `open_timeout`, `faraday_adapter`, `proxy`, `symbolize_keys`, `logger`, and `debug` globally:
 

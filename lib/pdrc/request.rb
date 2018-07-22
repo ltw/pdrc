@@ -20,6 +20,7 @@ module PDRC
     end
 
     def method_missing(method, *args)
+      @path_parts << method.to_s.downcase
       @path_parts << args if args.length > 0
       @path_parts.flatten!
       self
@@ -49,12 +50,6 @@ module PDRC
 
     def update(params: nil, headers: nil, body: nil)
       APIRequest.new(builder: self).patch(params: params, headers: headers, body: body)
-    ensure
-      reset
-    end
-
-    def upsert(params: nil, headers: nil, body: nil)
-      APIRequest.new(builder: self).put(params: params, headers: headers, body: body)
     ensure
       reset
     end

@@ -23,6 +23,6 @@ Gem::Specification.new do |s|
   s.add_dependency('multi_json', '>= 1.11.0')
 
   s.add_development_dependency 'rake'
-  s.add_development_dependency "rspec", "3.5.0"
+  s.add_development_dependency "rspec", "3.7.0"
   s.add_development_dependency 'webmock', '~> 1.21.0'
 end
