@@ -196,4 +196,22 @@ describe PDRC do
       expect(PDRC::Request.new.method(:teams)).to be_a(Method)
     end
   end
+
+  describe 'path building using method missing invocations' do
+    it 'constructs a path' do
+      expect(PDRC::Request.teams.path).to eq "teams"
+    end
+
+    it 'expands the paths over multiple invocations' do
+      expect(PDRC::Request.teams.users.path).to eq "teams/users"
+    end
+
+    it 'includes ids passed in as arguments' do
+      expect(PDRC::Request.teams("1234MYTEAM").path).to eq "teams/1234MYTEAM"
+    end
+
+    it 'expands multiple paths with arguments' do
+      expect(PDRC::Request.teams("1234-team").users("4321").path).to eq "teams/1234-team/users/4321"
+    end
+  end
 end
